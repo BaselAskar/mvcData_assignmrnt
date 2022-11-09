@@ -1,0 +1,68 @@
+﻿@using mvcData_assignmrnt.Data
+@model PersonParams
+@{
+    ViewData["Title"] = "AddPerson";
+}
+
+@section Style {
+    <link rel="stylesheet" href="~/css/add-people.css" asp-append-version="true" />
+
+}
+
+<h3 class="py-3">AddPerson</h3>
+
+<form method="post" asp-action="Create">
+    <div class="input-group py-2">
+        <label class="form-label lable" asp-for="@Model.FirstName"></label>
+        <div class="input-container">
+            <input asp-for="@Model.FirstName" class="form-control w-100" />
+        </div>
+    </div>
+    <div>
+        <span asp-validation-for="@Model.FirstName" class="text-danger invalid-text"></span>
+    </div>
+
+
+    <div class="input-group py-2">
+        <label class="form-label lable" asp-for="@Model.LastName"></label>
+        <div class="input-container">
+            <input asp-for="@Model.LastName" class="form-control" />
+        </div>
+    </div>
+        <div>
+        <span asp-validation-for="@Model.LastName" class="text-danger invalid-text"></span>
+        </div>
+
+
+
+    <div class="input-group py-2">
+        <label class="form-label lable" asp-for="@Model.Age"></label>
+        <div class="input-container">
+            <input asp-for="@Model.Age" class="form-control" />
+        </div>
+    </div>
+        <div>
+        <span asp-validation-for="@Model.Age" class="text-danger invalid-text"></span>
+        </div>
+
+
+
+    <div class="input-group py-2">
+        <label class="form-label lable" asp-for="@Model.City"></label>
+        <div class="input-container">
+            <select class="form-select w-100" asp-for="@Model.City">
+                @foreach(string city in MemoryData.Cities)
+                {
+                    <option value="@city">@city</option>
+                }
+            </select>
+        </div>
+    </div>
+    <div>
+        <button type="submit" class="btn btn-success add-btn">Add</button>
+    </div>
+
+</form>
+
+
+

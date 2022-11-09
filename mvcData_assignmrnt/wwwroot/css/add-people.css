@@ -1,0 +1,20 @@
+﻿.lable {
+    font-weight: bold;
+    margin: auto 0;
+    width:8%;
+}
+    
+
+
+.input-container {
+    width:30%;
+}
+
+.add-btn{
+    width:30%;
+    margin:1rem 8%;
+}
+
+.invalid-text{
+    margin:1rem 8%;
+}

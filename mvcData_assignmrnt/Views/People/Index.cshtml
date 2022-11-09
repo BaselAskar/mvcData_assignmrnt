@@ -1,0 +1,24 @@
+﻿@model List<Person>
+@{
+    ViewData["Title"] = "people";
+}
+
+@section Style {
+    <link rel="stylesheet" href="~/css/people-list.css" asp-append-version="true" />
+}
+
+<h1 class="text-center py-3">People</h1>
+
+<div class="container">
+    <a asp-action="AddPerson" class="btn btn-outline-success">Add Person</a>
+</div>
+
+<div class="container list">
+    @foreach(Person person in Model)
+    {
+        <partial name="_PersonRow" model="person" />
+    }
+</div>
+
+
+

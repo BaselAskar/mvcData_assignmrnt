@@ -1,0 +1,8 @@
+﻿.list{
+    margin:1.5rem 0;
+}
+
+.list > .row:nth-child(2n+1) {
+    background-color: #e7e7e7;
+}
+

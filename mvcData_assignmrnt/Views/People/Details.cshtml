@@ -1,0 +1,29 @@
+﻿@model Person
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1 class="text-center py-3">Details</h1>
+
+<div>
+    <div class="py-2">
+        <strong>First name: </strong><span>@Model.FirstName</span>
+    </div>
+    <div class="py-2">
+        <strong>Last name: </strong><span>@Model.LastName</span>
+    </div>
+
+    <div class="py-2">
+        <strong>Age: </strong><span>@Model.Age</span>
+    </div>
+
+    <div class="py-2">
+        <strong>City: </strong><span>@Model.City</span>
+    </div>
+
+    <div class="py-2">
+        <a asp-action="Index" class="link-primary fw-bold text-decoration-none">&larr; Go back</a>
+    </div>
+
+</div>
+

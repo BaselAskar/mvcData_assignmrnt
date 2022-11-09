@@ -1,0 +1,8 @@
+﻿@model Person
+
+
+<div class="row p-3 border-bottom">
+    <div class="col-3 my-auto">@Model.FirstName @Model.LastName</div>
+    <div class="col-6 my-auto">@Model.City</div>
+    <div class="col-3"><a class="btn btn-outline-primary" asp-action="Details" asp-route-id="@Model.Id">Details</a> </div>
+</div>
