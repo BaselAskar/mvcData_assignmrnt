@@ -1,6 +1,7 @@
 ﻿const deleteBtns = document.querySelectorAll('.remove');
 
-deleteBtns.forEach(btn => btn.addEventListener('click', removePeopleHandler))
+const peopleList = document.querySelector('.list');
+
 
 
 
@@ -17,8 +18,8 @@ function removePeopleHandler(event) {
     $.ajax({
         url: url,
         type: 'DELETE',
-        success: (_) => {
-            window.location.reload();
+        success: (result) => {
+            peopleList.innerHTML = result;
         }
 
     });
