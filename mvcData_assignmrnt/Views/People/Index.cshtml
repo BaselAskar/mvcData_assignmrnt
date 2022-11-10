@@ -14,11 +14,27 @@
 </div>
 
 <div class="container list">
+    @if(Model.Count == 0)
+    {
+        <div class="no-people">
+            No people added yet....!
+        </div>    
+    }
+    else
+    {
+        <partial name="_PeopleHeader"/>
+    }
+
+
     @foreach(Person person in Model)
     {
         <partial name="_PersonRow" model="person" />
     }
 </div>
 
+
+@section Scripts{
+    <script src="~/js/people-list.js" asp-append-version="true"></script>
+}
 
 

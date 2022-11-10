@@ -32,6 +32,7 @@ namespace mvcData_assignmrnt.Controllers
 
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Create(PersonParams personParams)
         {
             if (ModelState.IsValid)
@@ -54,6 +55,22 @@ namespace mvcData_assignmrnt.Controllers
             }
 
             return View(person);
+        }
+
+
+        [HttpDelete]
+        public IActionResult Delete(int id)
+        {
+            try
+            {
+                _peopleServic.DeletePerosn(id);
+            }
+            catch(Exception ex) 
+            {
+                return NotFound(ex.Message);
+            }
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }
