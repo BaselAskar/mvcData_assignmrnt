@@ -5,10 +5,12 @@ namespace mvcData_assignmrnt.Services
 {
     public interface IPeopleSerivce
     {
-        Person AddPerosn(PersonParams personParams);
-        List<Person> GetPeople();
-        Person? GetPersonById(int id);
-        void DeletePerosn(int id);
+        Person Add(CreatePersonView createPersonView);
+        List<Person> All();
+        List<Person> Search(string search,string by);
+        Person? FindById(int id);
+        bool Edit(int id, CreatePersonView createPersonView);
+        bool Remove(int id);
 
     }
 }

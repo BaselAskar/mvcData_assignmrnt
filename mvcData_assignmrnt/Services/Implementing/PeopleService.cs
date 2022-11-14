@@ -13,45 +13,71 @@ namespace mvcData_assignmrnt.Services.Implementing
         {
             _peopleRepo = new PeopleRepo();
         }
-        public Person AddPerosn(PersonParams personParams)
+        public Person Add(CreatePersonView createPersonView)
         {
-            if (personParams == null)
+            if (createPersonView == null)
             {
                 throw new ArgumentException("You have to add arguments....");
             }
 
             Person person = new Person
             {
-                Id = personParams.Id,
-                FirstName= personParams.FirstName,
-                LastName= personParams.LastName,
-                Age= personParams.Age,
-                City= personParams.City,
+                Name= createPersonView.Name,
+                PhoneNumber= createPersonView.PhoneNumber,
+                City= createPersonView.City,
             };
 
             return _peopleRepo.AddPerson(person);
         }
 
-        public void DeletePerosn(int id)
+        public bool Remove(int id)
         {
-            Person? person = GetPersonById(id);
+            Person? person = FindById(id);
 
             if (person == null)
             {
                 throw new Exception("The person is not found.....!");
             }
 
-            _peopleRepo.DeletePerson(person);
+            return _peopleRepo.Delete(person);
         }
 
-        public List<Person> GetPeople()
+        public List<Person> All()
         {
-            return _peopleRepo.GetAll();
+            return _peopleRepo.Read();
         }
 
-        public Person? GetPersonById(int id)
+
+        public List<Person> Search(string search, string by)
         {
-            return _peopleRepo.FindById(id);
+
+            List<Person> people = All();
+
+
+            if (by == "City")
+            {
+                return people.Where(p => p.City!.ToLower().Contains(search.ToLower())).ToList();
+            }
+
+            return people.Where(p => p.Name!.ToLower().Contains(search.ToLower())).ToList();
+        }
+
+        public Person? FindById(int id)
+        {
+            return _peopleRepo.ReadById(id);
+        }
+
+        public bool Edit(int id, CreatePersonView createPersonView)
+        {
+            Person person = new Person
+            {
+                Id = id,
+                Name = createPersonView.Name,
+                PhoneNumber = createPersonView.PhoneNumber,
+                City = createPersonView.City,
+            };
+
+            return _peopleRepo.Update(person);
         }
     }
 }

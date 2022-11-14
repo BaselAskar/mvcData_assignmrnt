@@ -7,10 +7,40 @@
     <link rel="stylesheet" href="~/css/people-list.css" asp-append-version="true" />
 }
 
-<h1 class="text-center py-3">People</h1>
+<h1 class="text-center py-4">People</h1>
+
+
 
 <div class="container">
-    <a asp-action="AddPerson" class="btn btn-outline-success">Add Person</a>
+    <div class="row border-bottom py-4">
+        <div class="col-3 col-lg-2"><a asp-action="AddPerson" class="btn btn-outline-success">Add Person</a></div>
+        <div class="col-3 col-lg-2"><button onclick="getAllPeople('@Url.Action("GetAllPeople","People")')" type="button" class="btn btn-primary">Get People</button></div>
+    </div>
+
+    <div id="search-id-form" class="row py-4 border-bottom">
+        <label class="col-3 col-md-2 my-auto fw-bold" for="search-id">perosn id:</label>
+        <div class="col-7 col-md-4 col-lg-3">
+            <input type="text" name="search-id" id="search-id" class="form-control" placeholder="person id" />
+        </div>  
+        <button onclick="findById('@Url.Action("SearchById","People")')" type="button" class="btn btn-primary col-3 col-md-2 mx-auto mt-3 m-md-0">Get by Id</button>
+    </div>
+
+    <div id="search-id-form" class="row py-4 border-bottom">
+        <label class="col-3 col-md-2 my-auto fw-bold" for="search-input">search</label>
+        <div class="col-5 col-md-4 col-lg-3">
+            <input type="search" name="search-id" id="search-input" class="form-control" placeholder="search" />
+        </div>
+        <div class="col-3">
+            <select class="form-select" id="search-by-select">
+                <option>Name</option>
+                <option>City</option>
+            </select>
+        </div>
+        <button onclick="getBy('@Url.Action("GetPeopleBy","People")')"  type="button" class="btn btn-primary col-3 col-md-2 mx-auto mt-3 m-md-0">Search</button>
+    </div>
+
+
+
 </div>
 
 <div class="container list">

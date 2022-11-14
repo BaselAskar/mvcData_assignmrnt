@@ -7,17 +7,17 @@ namespace mvcData_assignmrnt.Controllers
 {
     public class PeopleController : Controller
     {
-        private readonly PeopleService _peopleServic;
+        private readonly PeopleService _peopleService;
 
         public PeopleController()
         {
-            _peopleServic= new PeopleService();
+            _peopleService= new PeopleService();
         }
 
 
         public IActionResult Index()
         {
-            List<Person> people = _peopleServic.GetPeople();
+            List<Person> people = _peopleService.All();
             return View(people);
         }
 
@@ -25,7 +25,7 @@ namespace mvcData_assignmrnt.Controllers
 
         public IActionResult AddPerson()
         {
-            PersonParams personParams = new PersonParams();
+            CreatePersonView personParams = new CreatePersonView();
 
             return View(personParams);
         }
@@ -33,11 +33,11 @@ namespace mvcData_assignmrnt.Controllers
 
         [HttpPost]
         [AutoValidateAntiforgeryToken]
-        public IActionResult Create(PersonParams personParams)
+        public IActionResult Create(CreatePersonView personParams)
         {
             if (ModelState.IsValid)
             {
-                _peopleServic.AddPerosn(personParams);
+                _peopleService.Add(personParams);
                 return RedirectToAction("Index");
             }
 
@@ -47,7 +47,7 @@ namespace mvcData_assignmrnt.Controllers
 
         public IActionResult Details(int id)
         {
-            Person? person = _peopleServic.GetPersonById(id);
+            Person? person = _peopleService.FindById(id);
 
             if (person == null)
             {
@@ -61,11 +61,47 @@ namespace mvcData_assignmrnt.Controllers
         [HttpDelete]
         public IActionResult Delete(int id)
         {
-            _peopleServic.DeletePerosn(id);
+            bool result = _peopleService.Remove(id);
 
-            List<Person> people = _peopleServic.GetPeople();
+            if (!result)
+            {
+                return NotFound();
+            }
+
+            List<Person> people = _peopleService.All();
 
             return PartialView("_PeopleTable",people);
+        }
+
+
+
+        public IActionResult SearchById(int id)
+        {
+            Person? person = _peopleService.FindById(id);
+
+            if (person == null )
+            {
+                return PartialView("_PeopleTable",new List<Person>());
+            }
+
+            return PartialView("_PeopleTable",new List<Person> { person});
+        }
+
+
+
+        public IActionResult GetAllPeople()
+        {
+            List<Person> people = _peopleService.All();
+
+            return PartialView("_PeopleTable", people);
+        }
+
+
+        public IActionResult GetPeopleBy(string search, string by)
+        {
+            List<Person> result = _peopleService.Search(search, by);
+
+            return PartialView("_PeopleTable", result);
         }
     }
 }

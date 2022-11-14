@@ -5,9 +5,9 @@ namespace mvcData_assignmrnt.Repositories
     public interface IPeopleRepo
     {
         Person AddPerson(Person person);
-        List<Person> GetAll();
-        Person? FindById(int id);
-        Person? UpdatePerson(Person person);
-        void DeletePerson(Person person);
+        List<Person> Read();
+        Person? ReadById(int id);
+        bool Update(Person person);
+        bool Delete(Person person);
     }
 }

@@ -4,6 +4,11 @@ namespace mvcData_assignmrnt.Data
 {
     public class MemoryData
     {
+        private static int currentPersonId = 0;
+
+        public static int NextPersonId => ++currentPersonId;
+
+
         private static readonly List<string> cities = new List<string>
         {
             "Malmö","Växjö","Jönköping","Stockholm","Götoburg"
