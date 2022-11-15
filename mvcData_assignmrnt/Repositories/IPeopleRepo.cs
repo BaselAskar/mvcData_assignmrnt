@@ -8,6 +8,6 @@ namespace mvcData_assignmrnt.Repositories
         List<Person> Read();
         Person? ReadById(int id);
         bool Update(Person person);
-        bool Delete(Person person);
+        bool Delete(int id);
     }
 }

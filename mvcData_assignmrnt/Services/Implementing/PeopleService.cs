@@ -32,14 +32,7 @@ namespace mvcData_assignmrnt.Services.Implementing
 
         public bool Remove(int id)
         {
-            Person? person = FindById(id);
-
-            if (person == null)
-            {
-                throw new Exception("The person is not found.....!");
-            }
-
-            return _peopleRepo.Delete(person);
+            return _peopleRepo.Delete(id);
         }
 
         public List<Person> All()

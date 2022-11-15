@@ -15,34 +15,52 @@ namespace mvcData_assignmrnt.Repositories.Implemting
         public Person AddPerson(Person person)
         {
             person.Id = MemoryData.NextPersonId;
-            _data.People.Add(person);
+            //_data.People.Add(person);
+            //return person;
+            List<Person> people = Read();
+            people.Add(person);
+            _data.PeopleContext = people;
             return person;
         }
 
-        public bool Delete(Person person)
+        public bool Delete(int id)
         {
-            return _data.People.Remove(person);
+            List<Person> people = Read();
+            Person person = people.FirstOrDefault(p => p.Id == id);
+            bool result = people.Remove(person);
+            if (!result)
+            {
+                return false;
+            }
+
+            _data.PeopleContext = people;
+            return true;
         }
 
         public Person? ReadById(int id)
         {
-            return _data.People.FirstOrDefault(p => p.Id == id);
+            return _data.PeopleContext.FirstOrDefault(p => p.Id == id);
         }
 
         public List<Person> Read()
         {
-            return _data.People;
+            return _data.PeopleContext;
         }
 
         public bool Update(Person person)
         {
-            Person? selectedPerson = ReadById(person.Id);
+
+            List<Person> people = Read();
+
+            Person? selectedPerson = people.FirstOrDefault(p => p.Id == person.Id);
 
             if (selectedPerson != null)
             {
                 selectedPerson.Name = person.Name;
                 selectedPerson.PhoneNumber = person.PhoneNumber;
                 selectedPerson.City = person.City;
+
+                _data.PeopleContext = people;
 
                 return true;
             }
