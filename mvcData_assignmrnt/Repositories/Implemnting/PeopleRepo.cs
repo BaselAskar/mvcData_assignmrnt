@@ -14,7 +14,6 @@ namespace mvcData_assignmrnt.Repositories.Implemting
 
         public Person AddPerson(Person person)
         {
-            person.Id = MemoryData.NextPersonId;
             _data.People.Add(person);
             return person;
         }

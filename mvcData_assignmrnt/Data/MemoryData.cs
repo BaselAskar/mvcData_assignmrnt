@@ -7,6 +7,7 @@ namespace mvcData_assignmrnt.Data
         private static int currentPersonId = 0;
 
         public static int NextPersonId => ++currentPersonId;
+        public static void RestIdCounter() => currentPersonId = 0;
 
 
         private static readonly List<string> cities = new List<string>
