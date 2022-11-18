@@ -73,6 +73,8 @@ namespace test_mvcData.Repositories
         }
 
 
+
+
         [Fact]
         public void Read_Test()
         {
@@ -92,6 +94,16 @@ namespace test_mvcData.Repositories
 
             Assert.NotNull(result);
             Assert.Equal(name,result.Name);
+        }
+
+        [Theory]
+        [InlineData(3)]
+        [InlineData(10)]
+        public void ReadByIdPerson_Null_Test(int id)
+        {
+            var result = objectTest.ReadById(id);
+
+            Assert.Null(result);
         }
 
 
@@ -130,6 +142,23 @@ namespace test_mvcData.Repositories
             Assert.True(result);
             Assert.Single(peopleData);
 
+        }
+
+
+
+        [Fact]
+        public void Delete_Feild_Test()
+        {
+            Person person = new Person
+            {
+                Name = "Test",
+                PhoneNumber = 07215214,
+                City = "City"
+            };
+
+            var result = objectTest.Delete(person);
+
+            Assert.False(result);
         }
     }
 }
