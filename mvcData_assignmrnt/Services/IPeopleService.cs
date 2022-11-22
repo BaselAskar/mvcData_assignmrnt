@@ -3,7 +3,7 @@ using mvcData_assignmrnt.Models.DTOs;
 
 namespace mvcData_assignmrnt.Services
 {
-    public interface IPeopleSerivce
+    public interface IPeopleService
     {
         Person Add(CreatePersonView createPersonView);
         List<Person> All();

@@ -5,48 +5,40 @@ namespace mvcData_assignmrnt.Repositories.Implemting
 {
     public class PeopleRepo : IPeopleRepo
     {
-        private readonly MemoryData _data;
+        private readonly AppDbContext _context;
 
-        public PeopleRepo()
+        public PeopleRepo(AppDbContext context)
         {
-            _data = new MemoryData();
+            _context = context;
         }
 
         public Person AddPerson(Person person)
         {
-            _data.People.Add(person);
-            return person;
+            return _context.People!.Add(person).Entity;
         }
 
         public bool Delete(Person person)
         {
-            return _data.People.Remove(person);
+            var result = _context.People!.Remove(person);
+
+            return result != null;
         }
 
         public Person? ReadById(int id)
         {
-            return _data.People.FirstOrDefault(p => p.Id == id);
+            return _context.People!.Find(id);
         }
 
         public List<Person> Read()
         {
-            return _data.People;
+            return _context.People!.ToList();
         }
 
         public bool Update(Person person)
         {
-            Person? selectedPerson = ReadById(person.Id);
+            var result = _context.People!.Update(person);
 
-            if (selectedPerson != null)
-            {
-                selectedPerson.Name = person.Name;
-                selectedPerson.PhoneNumber = person.PhoneNumber;
-                selectedPerson.City = person.City;
-
-                return true;
-            }
-
-            return false;
+            return result != null;
         }
     }
 }

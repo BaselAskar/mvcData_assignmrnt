@@ -1,17 +1,18 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using mvcData_assignmrnt.Models;
 using mvcData_assignmrnt.Models.DTOs;
+using mvcData_assignmrnt.Services;
 using mvcData_assignmrnt.Services.Implementing;
 
 namespace mvcData_assignmrnt.Controllers
 {
     public class PeopleController : Controller
     {
-        private readonly PeopleService _peopleService;
+        private readonly IPeopleService _peopleService;
 
-        public PeopleController()
+        public PeopleController(IPeopleService peopleService)
         {
-            _peopleService= new PeopleService();
+            _peopleService = peopleService;
         }
 
 

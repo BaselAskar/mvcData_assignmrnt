@@ -5,13 +5,13 @@ using mvcData_assignmrnt.Repositories.Implemting;
 
 namespace mvcData_assignmrnt.Services.Implementing
 {
-    public class PeopleService : IPeopleSerivce
+    public class PeopleService : IPeopleService
     {
         private readonly IPeopleRepo _peopleRepo;
 
-        public PeopleService()
+        public PeopleService(IPeopleRepo peopleRepo)
         {
-            _peopleRepo = new PeopleRepo();
+            _peopleRepo = peopleRepo;
         }
         public Person Add(CreatePersonView createPersonView)
         {
