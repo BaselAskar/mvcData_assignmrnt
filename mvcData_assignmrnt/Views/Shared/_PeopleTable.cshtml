@@ -1,4 +1,4 @@
-﻿@model List<Person>
+﻿@model List<PersonView>
 
 @if (Model.Count == 0)
 {
@@ -16,7 +16,7 @@ else
 }
 
 
-@foreach (Person person in Model)
+@foreach (PersonView person in Model)
 {
     <partial name="_PersonRow" model="person" />
 }

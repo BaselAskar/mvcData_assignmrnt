@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using mvcData_assignmrnt.Models;
 using mvcData_assignmrnt.Models.DTOs;
+using mvcData_assignmrnt.ModelViews;
 using mvcData_assignmrnt.Services;
 using mvcData_assignmrnt.Services.Implementing;
 
@@ -9,16 +10,18 @@ namespace mvcData_assignmrnt.Controllers
     public class PeopleController : Controller
     {
         private readonly IPeopleService _peopleService;
+        private readonly ICountriesService _countriesService;
 
-        public PeopleController(IPeopleService peopleService)
+        public PeopleController(IPeopleService peopleService, ICountriesService countriesService)
         {
             _peopleService = peopleService;
+            _countriesService = countriesService;
         }
 
 
         public IActionResult Index()
         {
-            List<Person> people = _peopleService.All();
+            List<PersonView> people = _peopleService.All();
             return View(people);
         }
 
@@ -27,6 +30,8 @@ namespace mvcData_assignmrnt.Controllers
         public IActionResult AddPerson()
         {
             CreatePersonView personParams = new CreatePersonView();
+
+            personParams.Countries = _countriesService.GetAll();
 
             return View(personParams);
         }
@@ -48,7 +53,7 @@ namespace mvcData_assignmrnt.Controllers
 
         public IActionResult Details(int id)
         {
-            Person? person = _peopleService.FindById(id);
+            PersonView? person = _peopleService.FindById(id);
 
             if (person == null)
             {
@@ -69,7 +74,7 @@ namespace mvcData_assignmrnt.Controllers
                 return NotFound();
             }
 
-            List<Person> people = _peopleService.All();
+            List<PersonView> people = _peopleService.All();
 
             return PartialView("_PeopleTable",people);
         }
@@ -78,21 +83,21 @@ namespace mvcData_assignmrnt.Controllers
 
         public IActionResult SearchById(int id)
         {
-            Person? person = _peopleService.FindById(id);
+            PersonView? person = _peopleService.FindById(id);
 
             if (person == null )
             {
-                return PartialView("_PeopleTable",new List<Person>());
+                return PartialView("_PeopleTable",new List<PersonView>());
             }
 
-            return PartialView("_PeopleTable",new List<Person> { person});
+            return PartialView("_PeopleTable",new List<PersonView> { person});
         }
 
 
 
         public IActionResult GetAllPeople()
         {
-            List<Person> people = _peopleService.All();
+            List<PersonView> people = _peopleService.All();
 
             return PartialView("_PeopleTable", people);
         }
@@ -100,7 +105,7 @@ namespace mvcData_assignmrnt.Controllers
 
         public IActionResult GetPeopleBy(string search, string by)
         {
-            List<Person> result = _peopleService.Search(search, by);
+            List<PersonView> result = _peopleService.Search(search, by);
 
             return PartialView("_PeopleTable", result);
         }

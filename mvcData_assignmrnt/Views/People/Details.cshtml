@@ -1,4 +1,4 @@
-﻿@model Person
+﻿@model PersonView
 @{
     ViewData["Title"] = "Details";
 }
@@ -17,6 +17,11 @@
     <div class="py-2">
         <strong>City: </strong><span>@Model.City</span>
     </div>
+
+    <div class="py-2">
+        <strong>Country: </strong><span>@Model.Country</span>
+    </div>
+
 
     <div class="py-2">
         <a asp-action="Index" class="link-primary fw-bold text-decoration-none">&larr; Go back</a>

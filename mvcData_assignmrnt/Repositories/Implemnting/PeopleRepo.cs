@@ -29,7 +29,10 @@ namespace mvcData_assignmrnt.Repositories.Implemting
 
         public Person? ReadById(int id)
         {
-            return _context.People!.Find(id);
+            return _context.People!
+                .Include(p => p.City)
+                .ThenInclude(c => c!.Country)
+                .SingleOrDefault(p => p.Id == id);
         }
 
         public List<Person> Read()

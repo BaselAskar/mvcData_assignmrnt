@@ -1,5 +1,6 @@
 ﻿using mvcData_assignmrnt.Models;
 using mvcData_assignmrnt.Models.DTOs;
+using mvcData_assignmrnt.ModelViews;
 using mvcData_assignmrnt.Repositories;
 using mvcData_assignmrnt.Repositories.Implemting;
 
@@ -14,7 +15,7 @@ namespace mvcData_assignmrnt.Services.Implementing
             _peopleRepo = peopleRepo;
             _citiesRepo = citiesRepo;
         }
-        public Person Add(CreatePersonView createPersonView)
+        public PersonView Add(CreatePersonView createPersonView)
         {
             if (createPersonView == null)
             {
@@ -35,12 +36,26 @@ namespace mvcData_assignmrnt.Services.Implementing
                 City= city,
             };
 
-            return _peopleRepo.AddPerson(person);
+            var result = _peopleRepo.AddPerson(person);
+
+            if (person == null)
+            {
+                throw new Exception("Field to add person");
+            }
+
+            return new PersonView
+            {
+                Id = person.Id,
+                Name = person.Name,
+                PhoneNumber = person.PhoneNumber,
+                City = person.City?.Name!,
+                Country = person.City?.Country?.Name!
+            };
         }
 
         public bool Remove(int id)
         {
-            Person? person = FindById(id);
+            Person? person = _peopleRepo.ReadById(id);
 
             if (person == null)
             {
@@ -50,29 +65,50 @@ namespace mvcData_assignmrnt.Services.Implementing
             return _peopleRepo.Delete(person);
         }
 
-        public List<Person> All()
+        public List<PersonView> All()
         {
-            return _peopleRepo.Read();
+            return _peopleRepo.Read().Select(p => new PersonView
+            {
+                Id = p.Id,
+                Name = p.Name,
+                PhoneNumber = p.PhoneNumber,
+                City = p.City?.Name!,
+                Country = p.City?.Country?.Name!
+            }).ToList();
         }
 
 
-        public List<Person> Search(string search, string by)
+        public List<PersonView> Search(string search, string by)
         {
 
-            List<Person> people = All();
+            List<PersonView> people = All();
 
 
             if (by == "City")
             {
-                return people.Where(p => p.City!.Name!.ToLower().Contains(search.ToLower())).ToList();
+                return people.Where(p => p.City!.ToLower().Contains(search.ToLower())).ToList();
             }
 
             return people.Where(p => p.Name!.ToLower().Contains(search.ToLower())).ToList();
         }
 
-        public Person? FindById(int id)
+        public PersonView? FindById(int id)
         {
-            return _peopleRepo.ReadById(id);
+            var p = _peopleRepo.ReadById(id);
+
+            if (p == null)
+            {
+                return null;
+            }
+
+            return new PersonView
+            {
+                Id = p.Id,
+                Name = p.Name,
+                PhoneNumber = p.PhoneNumber,
+                City = p.City?.Name!,
+                Country = p.City?.Country?.Name!
+            };
         }
 
         public bool Edit(int id, CreatePersonView createPersonView)

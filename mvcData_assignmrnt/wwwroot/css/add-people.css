@@ -1,7 +1,7 @@
 ﻿.lable {
     font-weight: bold;
     margin: auto 0;
-    width:8%;
+    width:10%;
 }
     
 
@@ -12,7 +12,7 @@
 
 .add-btn{
     width:30%;
-    margin:1rem 8%;
+    margin:1rem 10%;
 }
 
 .invalid-text{

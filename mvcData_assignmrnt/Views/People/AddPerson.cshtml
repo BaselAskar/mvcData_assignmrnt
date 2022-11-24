@@ -13,13 +13,13 @@
 
 <form method="post" asp-action="Create">
     <div class="input-group py-2">
-        <label class="form-label lable" asp-for="@Model.Name"></label>
+        <label class="form-label lable" asp-for="Name"></label>
         <div class="input-container">
-            <input asp-for="@Model.Name" class="form-control w-100" />
+            <input asp-for="Name" class="form-control w-100" />
         </div>
     </div>
     <div>
-        <span asp-validation-for="@Model.Name" class="text-danger invalid-text"></span>
+        <span asp-validation-for="Name" class="text-danger invalid-text"></span>
     </div>
 
 
@@ -27,29 +27,33 @@
 
 
     <div class="input-group py-2">
-        <label class="form-label lable" asp-for="@Model.PhoneNumber"></label>
+        <label class="form-label lable" asp-for="PhoneNumber"></label>
         <div class="input-container">
-            <input asp-for="@Model.PhoneNumber" class="form-control" />
+            <input asp-for="PhoneNumber" class="form-control" />
         </div>
     </div>
         <div>
-        <span asp-validation-for="@Model.PhoneNumber" class="text-danger invalid-text"></span>
+        <span asp-validation-for="PhoneNumber" class="text-danger invalid-text"></span>
         </div>
 
 
 
     <div class="input-group py-2">
-        <label class="form-label lable" asp-for="@Model.CityName"></label>
+        <label class="form-label lable" asp-for="CityName"></label>
         <div class="input-container">
-            <select class="form-select w-100" asp-for="@Model.CityName">
-                @foreach(string city in MemoryData.Cities)
+            <select class="form-select w-100" asp-for="CityName">
+                @foreach(CountryView country in Model.Countries)
                 {
-                    <option value="@city">@city</option>
+                    <optgroup label="@country.Name">
+                        @foreach(string city in country.Cities)
+                        {
+                            <option>@city</option>
+                        }
+                    </optgroup>
                 }
             </select>
         </div>
     </div>
-    @Html.AntiForgeryToken()
     <div>
         <button type="submit" class="btn btn-success add-btn">Add</button>
     </div>

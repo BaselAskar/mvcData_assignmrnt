@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using mvcData_assignmrnt.ModelViews;
 using System.ComponentModel.DataAnnotations;
 using RequiredAttribute = System.ComponentModel.DataAnnotations.RequiredAttribute;
 
@@ -13,13 +14,16 @@ namespace mvcData_assignmrnt.Models.DTOs
         [Required]
         public string? Name { get; set; }
 
-        public int PhoneNumber { get; set; }
+        
+        public string? PhoneNumber { get; set; }
 
 
 
         [Required(ErrorMessage = "You have to add the City")]
         [Display(Name = "City")]
         public string? CityName { get; set; }
+
+        public List<CountryView> Countries { get; set; } = new List<CountryView>();
 
     }
 }
