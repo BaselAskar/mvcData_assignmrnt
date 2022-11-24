@@ -8,10 +8,11 @@ namespace mvcData_assignmrnt.Services.Implementing
     public class PeopleService : IPeopleService
     {
         private readonly IPeopleRepo _peopleRepo;
-
-        public PeopleService(IPeopleRepo peopleRepo)
+        private readonly ICitiesReop _citiesRepo;
+        public PeopleService(IPeopleRepo peopleRepo, ICitiesReop citiesRepo)
         {
             _peopleRepo = peopleRepo;
+            _citiesRepo = citiesRepo;
         }
         public Person Add(CreatePersonView createPersonView)
         {
@@ -20,11 +21,18 @@ namespace mvcData_assignmrnt.Services.Implementing
                 throw new ArgumentException("You have to add arguments....");
             }
 
+            if (createPersonView.CityName == null)
+            {
+                throw new ArgumentException("You have to provide city name");
+            }
+
+            City? city = _citiesRepo.FindByName(createPersonView.CityName);
+
             Person person = new Person
             {
                 Name= createPersonView.Name,
                 PhoneNumber= createPersonView.PhoneNumber,
-                City= createPersonView.City,
+                City= city,
             };
 
             return _peopleRepo.AddPerson(person);
@@ -56,7 +64,7 @@ namespace mvcData_assignmrnt.Services.Implementing
 
             if (by == "City")
             {
-                return people.Where(p => p.City!.ToLower().Contains(search.ToLower())).ToList();
+                return people.Where(p => p.City!.Name!.ToLower().Contains(search.ToLower())).ToList();
             }
 
             return people.Where(p => p.Name!.ToLower().Contains(search.ToLower())).ToList();
@@ -69,12 +77,25 @@ namespace mvcData_assignmrnt.Services.Implementing
 
         public bool Edit(int id, CreatePersonView createPersonView)
         {
+
+            if (createPersonView == null)
+            {
+                throw new ArgumentException("You have to add the person iformations....");
+            }
+
+            if (createPersonView.CityName== null)
+            {
+                throw new ArgumentException("You have to add city name");
+            }
+
+            City? city = _citiesRepo.FindByName(createPersonView.CityName);
+
             Person person = new Person
             {
                 Id = id,
                 Name = createPersonView.Name,
                 PhoneNumber = createPersonView.PhoneNumber,
-                City = createPersonView.City,
+                City = city
             };
 
             return _peopleRepo.Update(person);

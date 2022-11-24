@@ -1,4 +1,5 @@
 ﻿using mvcData_assignmrnt.Data;
+using System.ComponentModel.DataAnnotations;
 
 namespace mvcData_assignmrnt.Models
 {
@@ -8,7 +9,9 @@ namespace mvcData_assignmrnt.Models
         public int Id { get; init; }
         public string? Name { get; set; }
         public int PhoneNumber { get; set; }
-        public string? City { get; set; }
+
+        [Required]
+        public City? City { get; set; }
 
     }
 }

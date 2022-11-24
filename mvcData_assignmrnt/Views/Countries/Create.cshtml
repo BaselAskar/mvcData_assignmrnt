@@ -1,0 +1,45 @@
+﻿@model CreateCountryView
+@{
+    ViewData["Title"] = "Create";
+}
+
+@section Style {
+    <link rel="stylesheet" href="~/css/add-country.css" asp-append-version="true" />
+}
+
+
+<h1 class="text-center py-4">Add Country</h1>
+
+<div>
+    <form id="city-form" onsubmit="addCity(event)" ></form>
+    <form method="post" id="form">
+        <div class="row py-3">
+            <label asp-for="Name" class="col-12 col-md-3 col-lg-2"></label>
+            <div class="col-12 col-md-8 col-lg-9">
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+        </div>
+            
+
+            <div class="row">
+                <label class="col-12 col-md-3 col-lg-2">City</label>
+                <div class="col-8 col-md-4 col-lg-6">
+                    <input id="city-input" class="form-control" form="city-form" name="city" />
+                </div>
+                <button id="add-city-btn" form="city-form" type="submit" class="btn btn-outline-primary col-3 col-md-2 col-lg-2">Add</button>
+            </div>
+
+        @Html.ValidationMessage("citiesNames",new {@class="text-danger"})
+        <div id="cities" class="row">
+            
+        </div>
+        @Html.AntiForgeryToken()
+        <button type="submit" class="btn btn-success">Add Country</button>
+    </form>
+</div>
+
+@section Scripts {
+    <script src="~/js/add-country.js" asp-append-version="true"></script>
+}
+

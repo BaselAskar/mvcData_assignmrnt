@@ -1,0 +1,45 @@
+﻿#form {
+    max-width:500px;
+}
+
+#form label{
+    font-weight:bold;
+    margin:auto 0;
+}
+
+
+#cities{
+    margin: 1rem 0;
+    padding: 1rem;
+}
+
+.city-content {
+    align-items: center;
+    padding: 0.5rem;
+    border-radius: 10px;
+    box-shadow: 0 0 1rem #c6bdbd;
+    display:flex;
+    justify-content:center;
+    position:relative;
+    background-color:#00ff21;
+    margin:0.5rem 0;
+}
+
+.close {
+    position:absolute;
+    right:-0.5rem;
+    top:-0.5rem;
+    font-size:0.5rem;
+    padding:0.5rem;
+    border-radius:50%;
+    border:1px solid grey;
+    background-color:#fff;
+    opacity:1;
+}
+
+.cityName{
+    background:none;
+    border:none;
+    cursor:default;
+    text-align:center;
+}

@@ -39,9 +39,9 @@
 
 
     <div class="input-group py-2">
-        <label class="form-label lable" asp-for="@Model.City"></label>
+        <label class="form-label lable" asp-for="@Model.CityName"></label>
         <div class="input-container">
-            <select class="form-select w-100" asp-for="@Model.City">
+            <select class="form-select w-100" asp-for="@Model.CityName">
                 @foreach(string city in MemoryData.Cities)
                 {
                     <option value="@city">@city</option>

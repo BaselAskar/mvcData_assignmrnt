@@ -1,5 +1,6 @@
 ﻿using mvcData_assignmrnt.Models;
 using mvcData_assignmrnt.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace mvcData_assignmrnt.Repositories.Implemting
 {
@@ -14,14 +15,16 @@ namespace mvcData_assignmrnt.Repositories.Implemting
 
         public Person AddPerson(Person person)
         {
-            return _context.People!.Add(person).Entity;
+            var result = _context.People!.Add(person);
+            _context.SaveChanges();
+            return result.Entity;
         }
 
         public bool Delete(Person person)
         {
-            var result = _context.People!.Remove(person);
+            _context.People!.Remove(person);
 
-            return result != null;
+            return _context.SaveChanges() > 0;
         }
 
         public Person? ReadById(int id)
@@ -31,14 +34,16 @@ namespace mvcData_assignmrnt.Repositories.Implemting
 
         public List<Person> Read()
         {
-            return _context.People!.ToList();
+            return _context.People!
+                .Include(p => p.City)
+                .ToList();
         }
 
         public bool Update(Person person)
         {
             var result = _context.People!.Update(person);
 
-            return result != null;
+            return _context.SaveChanges() > 0;
         }
     }
 }

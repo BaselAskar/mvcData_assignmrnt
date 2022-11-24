@@ -18,7 +18,8 @@ namespace mvcData_assignmrnt.Models.DTOs
 
 
         [Required(ErrorMessage = "You have to add the City")]
-        public string? City { get; set; }
+        [Display(Name = "City")]
+        public string? CityName { get; set; }
 
     }
 }

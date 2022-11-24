@@ -1,0 +1,15 @@
+﻿#countries {
+    margin: 1.5rem 0;
+}
+
+#countries > .row:nth-child(2n+2) {
+    background-color: #e7e7e7;
+}
+
+
+.no-countries {
+    height: 250px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
