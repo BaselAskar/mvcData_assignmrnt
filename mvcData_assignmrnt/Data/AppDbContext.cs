@@ -13,6 +13,7 @@ namespace mvcData_assignmrnt.Data
         public DbSet<Person>? People { get; set; }
         public DbSet<City>? Cities { get; set; }
         public DbSet<Country>? Countries { get; set; }
+        public DbSet<Language> Languages { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -21,6 +22,8 @@ namespace mvcData_assignmrnt.Data
             modelBuilder.Entity<Country>(c => c.HasIndex(c => c.Name).IsUnique());
 
             modelBuilder.Entity<City>(c => c.HasIndex(city => city.Name).IsUnique());
+
+            modelBuilder.Entity<Language>(lang => lang.HasIndex(l => l.Name).IsUnique());
         }
     }
 }

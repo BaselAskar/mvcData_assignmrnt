@@ -22,8 +22,17 @@
         <strong>Country: </strong><span>@Model.Country</span>
     </div>
 
+    <div>
+        <strong>Languages: </strong>
+        <ul>
+            @foreach(string lang in Model.Languages)
+            {
+                <li>@lang</li>
+            }
+        </ul>
+    </div>
 
-    <div class="py-2">
+    <div class="py-4">
         <a asp-action="Index" class="link-primary fw-bold text-decoration-none">&larr; Go back</a>
     </div>
 

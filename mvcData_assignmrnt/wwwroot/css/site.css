@@ -16,3 +16,51 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.list {
+    margin: 1.5rem 0;
+}
+
+.list > .row:nth-child(2n+2) {
+    background-color: #e7e7e7;
+}
+
+.no-added {
+    height: 250px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.item-content {
+    align-items: center;
+    padding: 0.5rem;
+    border-radius: 10px;
+    box-shadow: 0 0 1rem #c6bdbd;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    background-color: #00ff21;
+    margin: 0.5rem 0;
+}
+
+.close {
+    position: absolute;
+    right: -0.5rem;
+    top: -0.5rem;
+    font-size: 0.5rem;
+    padding: 0.5rem;
+    border-radius: 50%;
+    border: 1px solid grey;
+    background-color: #fff;
+    opacity: 1;
+}
+
+
+.itemInput {
+    background: none;
+    border: none;
+    cursor: default;
+    text-align: center;
+}

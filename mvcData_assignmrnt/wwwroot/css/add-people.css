@@ -18,3 +18,9 @@
 .invalid-text{
     margin:1rem 8%;
 }
+
+
+#lang-list{
+    min-height:80px;
+    width:50%
+}

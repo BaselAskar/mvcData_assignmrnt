@@ -1,0 +1,24 @@
+﻿@model ListLanguagesView
+@{
+    ViewData["Title"] = "Language";
+}
+
+<h1 class="text-center py-4" >Languages</h1>
+
+<form onsubmit="addLanguage(event,'@Url.Action("AddLanguage")')" method="post" style="max-width:600px">
+    <label asp-for="Name" class="fw-bold my-3"></label>
+    <div class="col-11 col-md-8">
+        <input asp-for="Name" class="form-control" />
+        <p class="text-danger" id="valid-name"></p>
+    </div>
+        <button type="submit" class="btn btn-success my-4 col-3">Add</button>
+</form>
+
+<div class="list" id="languages-list">
+    <partial name="_LanguagesTable" model="@Model.Languages"/>
+</div>
+
+
+@section Scripts {
+    <script src="~/js/languages-lndex.js"></script>
+}

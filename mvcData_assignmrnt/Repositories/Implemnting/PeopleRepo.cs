@@ -32,6 +32,7 @@ namespace mvcData_assignmrnt.Repositories.Implemting
             return _context.People!
                 .Include(p => p.City)
                 .ThenInclude(c => c!.Country)
+                .Include(p => p.Languages)
                 .SingleOrDefault(p => p.Id == id);
         }
 

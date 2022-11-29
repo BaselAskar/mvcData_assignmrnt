@@ -20,9 +20,14 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IPeopleRepo,PeopleRepo>();
 builder.Services.AddScoped<ICitiesReop, CitiesRepo>();
 builder.Services.AddScoped<ICountriesRepo, CountriesRepo>();
+builder.Services.AddScoped<ILanguageRepo,LanguageRepo>();
+
 builder.Services.AddScoped<IPeopleService,PeopleService>();
 builder.Services.AddScoped<ICountriesService,CountriesService>();
-builder.Services.AddScoped<ICitiesReop,CitiesRepo>();
+builder.Services.AddScoped<ILanguageService,LanguageService>();
+
+
+
 
 var app = builder.Build();
 

@@ -7,7 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\typescript\add-person.ts" />
     <Content Remove="wwwroot\typescript\countries-list.ts" />
+    <Content Remove="wwwroot\typescript\languages-lndex.ts" />
   </ItemGroup>
 
   <ItemGroup>
@@ -29,11 +31,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\ts\" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <TypeScriptCompile Include="wwwroot\typescript\add-person.ts" />
     <TypeScriptCompile Include="wwwroot\typescript\countries-list.ts" />
+    <TypeScriptCompile Include="wwwroot\typescript\languages-lndex.ts" />
   </ItemGroup>
 
 </Project>

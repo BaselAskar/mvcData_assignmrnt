@@ -11,11 +11,13 @@ namespace mvcData_assignmrnt.Controllers
     {
         private readonly IPeopleService _peopleService;
         private readonly ICountriesService _countriesService;
+        private readonly ILanguageService _languageService;
 
-        public PeopleController(IPeopleService peopleService, ICountriesService countriesService)
+        public PeopleController(IPeopleService peopleService, ICountriesService countriesService, ILanguageService languageService)
         {
             _peopleService = peopleService;
             _countriesService = countriesService;
+            _languageService = languageService;
         }
 
 
@@ -32,6 +34,7 @@ namespace mvcData_assignmrnt.Controllers
             CreatePersonView personParams = new CreatePersonView();
 
             personParams.Countries = _countriesService.GetAll();
+            personParams.Languages = _languageService.GetAll();
 
             return View(personParams);
         }
@@ -47,7 +50,12 @@ namespace mvcData_assignmrnt.Controllers
                 return RedirectToAction("Index");
             }
 
-            return View(nameof(AddPerson),personParams);
+            personParams.Countries = _countriesService.GetAll();
+            personParams.Languages = _languageService.GetAll();
+
+            return View(nameof(AddPerson), personParams);
+
+
         }
 
 

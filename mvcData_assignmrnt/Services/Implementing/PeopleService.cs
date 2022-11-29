@@ -10,10 +10,12 @@ namespace mvcData_assignmrnt.Services.Implementing
     {
         private readonly IPeopleRepo _peopleRepo;
         private readonly ICitiesReop _citiesRepo;
-        public PeopleService(IPeopleRepo peopleRepo, ICitiesReop citiesRepo)
+        private readonly ILanguageRepo _languageRepo;
+        public PeopleService(IPeopleRepo peopleRepo, ICitiesReop citiesRepo, ILanguageRepo languageRepo)
         {
             _peopleRepo = peopleRepo;
             _citiesRepo = citiesRepo;
+            _languageRepo = languageRepo;
         }
         public PersonView Add(CreatePersonView createPersonView)
         {
@@ -27,6 +29,25 @@ namespace mvcData_assignmrnt.Services.Implementing
                 throw new ArgumentException("You have to provide city name");
             }
 
+            if (createPersonView.LangsName == null || createPersonView.LangsName.Length == 0)
+            {
+                throw new ArgumentException("You have to add the person's languages..!");
+            }
+
+            List<Language> languages = new List<Language>();
+
+            foreach (string name in createPersonView.LangsName)
+            {
+                Language? language = _languageRepo.FindByName(name);
+
+                if (language == null)
+                {
+                    throw new Exception("Field to find the language..!");
+                }
+
+                languages.Add(language);
+            }
+
             City? city = _citiesRepo.FindByName(createPersonView.CityName);
 
             Person person = new Person
@@ -34,6 +55,7 @@ namespace mvcData_assignmrnt.Services.Implementing
                 Name= createPersonView.Name,
                 PhoneNumber= createPersonView.PhoneNumber,
                 City= city,
+                Languages = languages
             };
 
             var result = _peopleRepo.AddPerson(person);
@@ -101,13 +123,16 @@ namespace mvcData_assignmrnt.Services.Implementing
                 return null;
             }
 
+
+
             return new PersonView
             {
                 Id = p.Id,
                 Name = p.Name,
                 PhoneNumber = p.PhoneNumber,
                 City = p.City?.Name!,
-                Country = p.City?.Country?.Name!
+                Country = p.City?.Country?.Name!,
+                Languages = p.Languages!.Select(lang => lang.Name!).ToList()
             };
         }
 
