@@ -39,6 +39,7 @@ namespace mvcData_assignmrnt.Services.Implementing
 
             CountryView result = new CountryView
             {
+                Id= country.Id,
                 Name = countryView.Name,
                 Cities = country.Cities!.Select(c => c.Name!).ToList()
             };

@@ -117,5 +117,15 @@ namespace mvcData_assignmrnt.Controllers
 
             return PartialView("_PeopleTable", result);
         }
+
+
+
+
+        public IActionResult Edit(UpdatePersonView updatePerson)
+        {
+
+
+            return View(updatePerson);
+        }
     }
 }

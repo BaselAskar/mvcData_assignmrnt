@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using mvcData_assignmrnt.Models;
+using mvcData_assignmrnt.Models.DTOs;
 
 namespace mvcData_assignmrnt.Data
 {
@@ -13,7 +14,7 @@ namespace mvcData_assignmrnt.Data
         public DbSet<Person>? People { get; set; }
         public DbSet<City>? Cities { get; set; }
         public DbSet<Country>? Countries { get; set; }
-        public DbSet<Language> Languages { get; set; }
+        public DbSet<Language>? Languages { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -25,5 +26,7 @@ namespace mvcData_assignmrnt.Data
 
             modelBuilder.Entity<Language>(lang => lang.HasIndex(l => l.Name).IsUnique());
         }
+
+        public DbSet<mvcData_assignmrnt.Models.DTOs.UpdatePersonView> UpdatePersonView { get; set; }
     }
 }

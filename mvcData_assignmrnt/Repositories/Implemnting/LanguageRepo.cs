@@ -27,17 +27,17 @@ namespace mvcData_assignmrnt.Repositories.Implemnting
 
         public Language? FinById(int id)
         {
-            return _context.Languages.Find(id);
+            return _context.Languages!.Find(id);
         }
 
         public List<Language> FindAll()
         {
-            return _context.Languages.ToList();
+            return _context.Languages!.ToList();
         }
 
         public Language? FindByName(string name)
         {
-           return _context.Languages.SingleOrDefault(l => l.Name == name);
+           return _context.Languages!.SingleOrDefault(l => l.Name == name);
         }
 
         public bool Update(Language language)
@@ -48,7 +48,7 @@ namespace mvcData_assignmrnt.Repositories.Implemnting
                 return false;
             }
 
-            _context.Languages.Update(language);
+            _context.Languages!.Update(language);
             return _context.SaveChanges() > 0;
         }
     }
