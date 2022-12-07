@@ -11,10 +11,10 @@ namespace mvcData_assignmrnt.Data
 
         }
 
-        public DbSet<Person>? People { get; set; }
-        public DbSet<City>? Cities { get; set; }
-        public DbSet<Country>? Countries { get; set; }
-        public DbSet<Language>? Languages { get; set; }
+        public DbSet<Person> People { get; set; } = default!;
+        public DbSet<City> Cities { get; set; } = default!;
+        public DbSet<Country> Countries { get; set; } = default!;
+        public DbSet<Language> Languages { get; set; } = default!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
