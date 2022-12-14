@@ -12,8 +12,8 @@ using mvcData_assignmrnt.Data;
 namespace mvcData_assignmrnt.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20221214095927_AddIdentity")]
-    partial class AddIdentity
+    [Migration("20221214150626_Iniial")]
+    partial class Iniial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -230,7 +230,6 @@ namespace mvcData_assignmrnt.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("UserName")
-                        .IsRequired()
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
