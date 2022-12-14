@@ -1,0 +1,74 @@
+﻿@model RegisterView
+@{
+    ViewData["Title"] = "Register";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+
+
+@section Style {
+    <link rel="stylesheet" href="~/css/login.css"  asp-append-version="true" />
+}
+    <form method="post" class="login-form">
+        <h1 class="text-center p-3">Register</h1>
+    
+        <div class="p-2">
+            <label asp-for="FirstName" class="fw-bold py-2"></label>
+            <input asp-for="FirstName" class="form-control" />
+            <span asp-validation-for="FirstName" class="text-danger"></span>
+        </div>
+    
+        <div class="p-2">
+            <label asp-for="LastName" class="fw-bold py-2"></label>
+            <input asp-for="LastName" class="form-control" />
+            <span asp-validation-for="LastName" class="text-danger"></span>
+        </div>
+    
+        <div class="p-2">
+            <label asp-for="Email" class="fw-bold py-2"></label>
+            <input asp-for="Email" class="form-control" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+    
+        <div class="p-2">
+            <label asp-for="UserName" class="fw-bold py-2"></label>
+            <input asp-for="UserName" class="form-control" />
+            <span asp-validation-for="UserName" class="text-danger"></span>
+        </div>
+    
+        <div class="p-2">
+            <label asp-for="PhoneNumber" class="fw-bold py-2"></label>
+            <input asp-for="PhoneNumber" class="form-control" />
+            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+        </div>
+    
+        <div class="p-2">
+            <label asp-for="BirthDate" class="fw-bold py-2"></label>
+            <input asp-for="BirthDate" class="form-control" />
+            <span asp-validation-for="BirthDate" class="text-danger"></span>
+        </div>
+    
+        <div class="p-2">
+            <label asp-for="Password" class="fw-bold py-2"></label>
+            <input asp-for="Password" class="form-control" />
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+    
+        <div class="p-2">
+            <label asp-for="ConfirmPassword" class="fw-bold py-2"></label>
+            <input asp-for="ConfirmPassword" class="form-control" />
+            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+        </div>
+    
+        <div class="p-2">
+            <input asp-for="KeepSigin" class="form-check-inline" />
+            <label asp-for="KeepSigin" class="fw-bold py-2"></label>
+        </div>
+    
+        @Html.AntiForgeryToken()
+        <div class="d-flex flex-column align-items-center">
+            <button class="btn btn-success mx-auto my-4 px-5" type="submit">Register</button>
+            <a class="link-primary text-decoration-none" asp-action="Login" asp-controller="Account" asp-route-ReturnUrl="@Model.ReturnUrl">Back to login</a>
+        </div>
+    
+    
+    </form>

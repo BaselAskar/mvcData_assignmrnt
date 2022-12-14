@@ -6,7 +6,7 @@
 
 
 @section Style {
-    <link rel="stylesheet" href="~/css/login.css" />
+    <link rel="stylesheet" href="~/css/login.css" asp-append-version="true"/>
 }
 
 
@@ -18,22 +18,27 @@
 
         <div class="p-2">
             <label asp-for="Email" class="fw-bold py-2"></label>
-            <input asp-for="Email" class="form-control" type="email" />
+            <input asp-for="Email" class="form-control" />
             <span asp-validation-for="Email" class="text-danger"></span>
         </div>
 
         <div class="p-2">
             <label asp-for="Password" class="fw-bold py-2"></label>
-            <input asp-for="Password" class="form-control" type="password" />
+            <input asp-for="Password" class="form-control" />
             <span asp-validation-for="Password" class="text-danger"></span>
         </div>
 
+        <div class="p-2">
+            <input asp-for="KeepSignIn" class="form-check-inline" />
+            <label asp-for="KeepSignIn" class="fw-bold py-2"></label>
+        </div>
 
-        <div class="d-flex">
+        @Html.AntiForgeryToken()
+        <div class="d-flex flex-column align-items-center">
             <button class="btn btn-primary mx-auto my-4 px-5" type="submit">Login</button>
+            <a class="link-success text-decoration-none" asp-action="Register" asp-controller="Account" asp-route-ReturnUrl="@Model.ReturnUrl" >Register</a>
         </div>
     </form>
+
 </div>
-
-
 

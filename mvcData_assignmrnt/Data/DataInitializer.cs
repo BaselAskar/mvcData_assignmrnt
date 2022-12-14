@@ -27,7 +27,9 @@ namespace mvcData_assignmrnt.Data
 
                 AppUser superAdmin = new AppUser
                 {
-                    UserName = "Super_Admin",
+                    FirstName = "Super",
+                    LastName = "Admin",
+                    UserName= "Super Admin",
                     Email = "superAdmin@gmail.com",
                     BirthDay = DateTime.Parse("1985-01-01")
                 };
@@ -38,7 +40,7 @@ namespace mvcData_assignmrnt.Data
 
                 if (!identityResult.Succeeded)
                 {
-
+                    throw new Exception("super admin has not been added ... !");
                 }
 
                 await userManager.AddToRoleAsync(superAdmin,Roles.SuperAdmin);

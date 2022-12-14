@@ -23,11 +23,13 @@ namespace mvcData_assignmrnt.Data
 
             modelBuilder.Entity<Country>(c => c.HasIndex(c => c.Name).IsUnique());
 
-            modelBuilder.Entity<City>(c => c.HasIndex(city => city.Name).IsUnique());
+            modelBuilder.Entity<City>(c => { 
+                c.HasIndex(city => city.Name).IsUnique(); 
+            });
 
             modelBuilder.Entity<Language>(lang => lang.HasIndex(l => l.Name).IsUnique());
+
         }
 
-        public DbSet<UpdatePersonView> UpdatePersonView { get; set; }
     }
 }
