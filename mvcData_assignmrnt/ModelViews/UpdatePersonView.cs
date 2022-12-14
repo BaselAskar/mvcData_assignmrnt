@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 
-namespace mvcData_assignmrnt.Models.DTOs
+namespace mvcData_assignmrnt.ModelViews
 {
     [BindProperties]
     public class UpdatePersonView

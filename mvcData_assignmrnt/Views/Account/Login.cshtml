@@ -1,0 +1,39 @@
+﻿@model LoginView
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+
+
+@section Style {
+    <link rel="stylesheet" href="~/css/login.css" />
+}
+
+
+
+
+<div>
+    <form method="post" class="login-form">
+        <h1 class="text-center p-3">Login</h1>
+
+        <div class="p-2">
+            <label asp-for="Email" class="fw-bold py-2"></label>
+            <input asp-for="Email" class="form-control" type="email" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+
+        <div class="p-2">
+            <label asp-for="Password" class="fw-bold py-2"></label>
+            <input asp-for="Password" class="form-control" type="password" />
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+
+
+        <div class="d-flex">
+            <button class="btn btn-primary mx-auto my-4 px-5" type="submit">Login</button>
+        </div>
+    </form>
+</div>
+
+
+

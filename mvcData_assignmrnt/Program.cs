@@ -1,5 +1,7 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using mvcData_assignmrnt.Data;
+using mvcData_assignmrnt.Models;
 using mvcData_assignmrnt.Repositories;
 using mvcData_assignmrnt.Repositories.Implemnting;
 using mvcData_assignmrnt.Repositories.Implemting;
@@ -17,7 +19,6 @@ options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectio
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddScoped<IDataInitializer, DataInitializer>();
 builder.Services.AddScoped<IPeopleRepo,PeopleRepo>();
 builder.Services.AddScoped<ICitiesReop, CitiesRepo>();
 builder.Services.AddScoped<ICountriesRepo, CountriesRepo>();
@@ -27,6 +28,16 @@ builder.Services.AddScoped<IPeopleService,PeopleService>();
 builder.Services.AddScoped<ICountriesService,CountriesService>();
 builder.Services.AddScoped<ILanguageService,LanguageService>();
 
+
+
+builder.Services.AddIdentity<AppUser, IdentityRole>()
+    .AddEntityFrameworkStores<AppDbContext>()
+    .AddDefaultTokenProviders();
+
+builder.Services.ConfigureApplicationCookie(option =>
+{
+    option.LoginPath = "/Account/Login";
+});
 
 
 
@@ -43,8 +54,10 @@ if (!app.Environment.IsDevelopment())
 using var scope = app.Services.CreateScope();
 {
     var services = scope.ServiceProvider;
-    IDataInitializer initializer = services.GetRequiredService<IDataInitializer>();
-    initializer.Seed();
+    AppDbContext context = services.GetRequiredService<AppDbContext>();
+    RoleManager<IdentityRole> roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+    UserManager<AppUser> userManager = services.GetRequiredService<UserManager<AppUser>>();
+    await DataInitializer.Seed(context,roleManager,userManager);
 }
     
 
@@ -56,10 +69,11 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=People}/{action=Index}/{id?}");
 
 app.Run();

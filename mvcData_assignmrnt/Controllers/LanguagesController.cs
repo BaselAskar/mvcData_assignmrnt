@@ -1,12 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
-
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using mvcData_assignmrnt.Constants;
 using mvcData_assignmrnt.Models;
-using mvcData_assignmrnt.Models.DTOs;
 using mvcData_assignmrnt.ModelViews;
 using mvcData_assignmrnt.Services;
 
 namespace mvcData_assignmrnt.Controllers
 {
+    [Authorize(Roles = $"{Roles.SuperAdmin},{Roles.Admin}")]
     public class LanguagesController : Controller
     {
         private readonly ILanguageService _languageService;

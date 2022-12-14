@@ -1,12 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using mvcData_assignmrnt.Models;
-using mvcData_assignmrnt.Models.DTOs;
 using mvcData_assignmrnt.ModelViews;
 using mvcData_assignmrnt.Services;
 using mvcData_assignmrnt.Services.Implementing;
 
 namespace mvcData_assignmrnt.Controllers
 {
+    [Authorize]
     public class PeopleController : Controller
     {
         private readonly IPeopleService _peopleService;
@@ -19,7 +20,6 @@ namespace mvcData_assignmrnt.Controllers
             _countriesService = countriesService;
             _languageService = languageService;
         }
-
 
         public IActionResult Index()
         {

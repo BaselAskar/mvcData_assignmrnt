@@ -1,10 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using mvcData_assignmrnt.Models;
-using mvcData_assignmrnt.Models.DTOs;
+using mvcData_assignmrnt.ModelViews;
 
 namespace mvcData_assignmrnt.Data
 {
-    public class AppDbContext : DbContext
+    public class AppDbContext : IdentityDbContext<AppUser>
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
@@ -27,6 +28,6 @@ namespace mvcData_assignmrnt.Data
             modelBuilder.Entity<Language>(lang => lang.HasIndex(l => l.Name).IsUnique());
         }
 
-        public DbSet<mvcData_assignmrnt.Models.DTOs.UpdatePersonView> UpdatePersonView { get; set; }
+        public DbSet<UpdatePersonView> UpdatePersonView { get; set; }
     }
 }

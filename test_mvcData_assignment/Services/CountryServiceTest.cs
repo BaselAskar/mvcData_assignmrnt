@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using mvcData_assignmrnt.Data;
 using mvcData_assignmrnt.Models;
-using mvcData_assignmrnt.Models.DTOs;
 using mvcData_assignmrnt.ModelViews;
 using mvcData_assignmrnt.Services;
 using mvcData_assignmrnt.Services.Implementing;

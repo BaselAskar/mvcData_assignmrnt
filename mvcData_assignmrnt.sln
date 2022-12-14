@@ -5,7 +5,7 @@ VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "mvcData_assignmrnt", "mvcData_assignmrnt\mvcData_assignmrnt.csproj", "{350436B0-5754-45D0-B55B-5FE23FC5A71C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "test_mvcData_assignment", "test_mvcData_assignment\test_mvcData_assignment.csproj", "{533D305A-9F38-4589-A380-19BEEB764579}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "test_mvcData_assignment", "test_mvcData_assignment\test_mvcData_assignment.csproj", "{533D305A-9F38-4589-A380-19BEEB764579}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

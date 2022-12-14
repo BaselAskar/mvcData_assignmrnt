@@ -1,22 +1,52 @@
-﻿using mvcData_assignmrnt.Models;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using mvcData_assignmrnt.Constants;
+using mvcData_assignmrnt.Models;
 
 namespace mvcData_assignmrnt.Data
 {
-    public class DataInitializer : IDataInitializer
+    public class DataInitializer
     {
-        private readonly AppDbContext _context;
+       
 
-        public DataInitializer(AppDbContext context)
+        public static async Task Seed(AppDbContext context,RoleManager<IdentityRole> roleManager,UserManager<AppUser> userManager)
         {
-            _context = context;
-        }
+            await context.Database.MigrateAsync();
 
-        public void Seed()
-        {
-            _context.Database.EnsureCreated();
+            if (!context.Roles.Any())
+            {
+                string[] rolesNames = {Roles.SuperAdmin,Roles.Admin,Roles.User};
+
+                foreach (string roleName in rolesNames)
+                {
+                    IdentityRole role = new IdentityRole(roleName);
+
+                    await roleManager.CreateAsync(role);
+                }
+
+
+                AppUser superAdmin = new AppUser
+                {
+                    UserName = "Super_Admin",
+                    Email = "superAdmin@gmail.com",
+                    BirthDay = DateTime.Parse("1985-01-01")
+                };
+
+
+
+                var identityResult = await userManager.CreateAsync(superAdmin, "Pa$$w0rd");
+
+                if (!identityResult.Succeeded)
+                {
+
+                }
+
+                await userManager.AddToRoleAsync(superAdmin,Roles.SuperAdmin);
+
+            }
 
             //Seeding Languages
-            if (!_context.Languages.Any())
+            if (!context.Languages.Any())
             {
                 List<Language> languages = new List<Language>
                 {
@@ -24,11 +54,12 @@ namespace mvcData_assignmrnt.Data
                     new Language{Name = "English"}
                 };
 
-                _context.Languages.AddRange(languages);
-                _context.SaveChanges();
+                languages.ForEach(lang => context.Languages.Add(lang));
+
+                await context.SaveChangesAsync();
             }
 
-            if (!_context.Countries.Any())
+            if (!context.Countries.Any())
             {
                 List<Country> countries = new List<Country>
                 {
@@ -43,8 +74,8 @@ namespace mvcData_assignmrnt.Data
                 };
 
 
-                _context.Countries.AddRange(countries);
-                _context.SaveChanges();
+                countries.ForEach(c => context.Countries.Add(c));
+                await context.SaveChangesAsync();
             }
         }
     }
