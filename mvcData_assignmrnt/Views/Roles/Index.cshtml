@@ -1,0 +1,37 @@
+﻿
+@model List<UserView>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1 class="text-center py-4">Users</h1>
+
+<div class="container list">
+    <div class="row border-bottom d-flex justify-content-between py-2">
+        <div class="col-3 fw-bold">UserName</div>
+        <div class="col-3 fw-bold">Role</div>
+    </div>
+    @foreach(UserView user in Model)
+    {
+        <div class="row border-bottom d-flex justify-content-between py-2">
+            <div class="col-3 my-auto">@user.UserName</div>
+            <div class="col-3">
+                <form method="post" asp-action="UpdateUserRoles">
+                    <select class="form-select" name="role" onchange="changeRole(event)">
+                        @foreach(string role in ViewBag.Roles)
+                        {
+                            <option selected="@(role == user.Role)">@role</option>
+                        }
+                    </select>
+                    <input type="hidden" name="userId" readonly value="@user.Id"/>
+                    @Html.AntiForgeryToken()
+                </form>
+            </div>
+        </div>
+
+    }
+</div>
+
+@section Scripts{
+    <script src="~/js/role-manager.js" asp-append-version="true"></script>
+}

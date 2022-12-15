@@ -32,7 +32,7 @@ builder.Services.AddScoped<ILanguageService,LanguageService>();
 
 builder.Services.AddIdentity<AppUser, IdentityRole>(option =>
 {
-    option.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890" +
+    option.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzåöäABCDEFGHIJKLMNOPQRSTUVWXYZÅÖÄ1234567890" +
                                                          "_-@%&.+ ";
 })
     .AddEntityFrameworkStores<AppDbContext>()
